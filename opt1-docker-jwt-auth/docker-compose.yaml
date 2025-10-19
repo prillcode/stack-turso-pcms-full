@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  # libSQL Server with JWT Authentication
+  libsql:
+    image: ghcr.io/tursodatabase/libsql-server:latest
+    platform: linux/amd64
+    container_name: libsql-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data/libsql:/var/lib/sqld
+      - ./config/jwt-public-key.pem:/etc/sqld/jwt-public-key.pem:ro
+    environment:
+      - SQLD_NODE=primary
+      - SQLD_AUTH_JWT_KEY_FILE=/etc/sqld/jwt-public-key.pem
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  # Payload CMS Application
+  payload:
+    build:
+      context: ./payload-app
+      dockerfile: Dockerfile
+    container_name: payload-cms
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URI=http://libsql:8080
+      - DATABASE_AUTH_TOKEN=${LIBSQL_JWT_TOKEN}
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET}
+      - PAYLOAD_CONFIG_PATH=./payload.config.ts
+    volumes:
+      - ./payload-app:/app
+      - /app/node_modules
+    depends_on:
+      - libsql
+    restart: unless-stopped
+    networks:
+      - app-network
+    command: npm run dev
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  libsql-data:

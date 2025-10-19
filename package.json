@@ -1,0 +1,35 @@
+{
+  "name": "payload-libsql-app",
+  "version": "1.0.0",
+  "description": "Payload CMS with libSQL/Turso",
+  "main": "index.js",
+  "scripts": {
+    "dev": "payload dev",
+    "build": "payload build",
+    "start": "payload start",
+    "generate:types": "payload generate:types",
+    "migrate": "payload migrate",
+    "migrate:create": "payload migrate:create"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.15.15",
+    "@payloadcms/db-sqlite": "^3.0.0",
+    "@payloadcms/richtext-slate": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "payload": "^3.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^20.14.9",
+    "@types/react": "^19.2.2",
+    "jsonwebtoken": "^9.0.2",
+    "typescript": "^5.5.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
