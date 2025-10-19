@@ -53,20 +53,28 @@ See **[SETUP.md](./SETUP.md)** for detailed instructions.
 
 ```
 .
-├── docker-compose.yml          # Full stack with JWT auth
-├── docker-compose-simple.yml   # Simple stack without auth
-├── payload-app/                # Your Payload CMS application
-│   ├── payload.config.ts       # Database configuration
-│   ├── Dockerfile              # Container definition
-│   └── package.json            # Dependencies
-├── config/                     # JWT keys (if using auth)
-│   ├── jwt-private-key.pem
-│   └── jwt-public-key.pem
-├── data/                       # Persistent database storage
-│   └── libsql/
-├── .env                        # Environment variables
-├── SETUP.md                    # Detailed setup guide
-└── README.md                   # This file
+├── opt1-docker-jwt-auth/          # Option 1: Docker with JWT authentication
+│   ├── docker-compose.yaml        # Stack with JWT auth
+│   ├── .env.example               # Environment template
+│   ├── generate-token.js          # JWT token generator
+│   └── setup-jwt-auth.sh          # Automated setup script
+│
+├── opt2-docker-no-auth/           # Option 2: Docker without authentication
+│   ├── docker-compose.yaml        # Simple stack, no auth
+│   └── .env.example               # Environment template
+│
+├── opt3-no-docker/                # Option 3: Turso CLI (no Docker)
+│   └── .env.example               # Environment template
+│
+├── payload.config.ts              # Payload CMS configuration
+├── libsql-client-examples.ts     # libSQL client usage examples
+├── Dockerfile                     # Container definition for Payload
+├── package.json                   # Project dependencies
+├── pnpm-workspace.yaml            # pnpm workspace config
+├── quick-start.sh                 # Interactive setup script
+├── .gitignore                     # Git ignore rules
+├── SETUP.md                       # Detailed setup guide
+└── README.md                      # This file
 ```
 
 ## Access Points
