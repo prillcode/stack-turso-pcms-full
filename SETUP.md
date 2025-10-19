@@ -124,6 +124,7 @@ turso dev --port 8080
 3. **Update your `.env`:**
 ```env
 DATABASE_URI=http://127.0.0.1:8080
+PAYLOAD_SECRET=your-secret-key-change-in-production
 ```
 
 4. **Start Payload:**
